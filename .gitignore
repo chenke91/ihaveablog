@@ -57,4 +57,4 @@ venv3/
 venv/
 
 *.db
-*.sqlit
+*.sqlite

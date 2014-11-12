@@ -6,6 +6,10 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard-to-guess-key'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
+    # user info
+    BLOG_USERNAME = os.environ.get('BLOG_NAME') or 'test'
+    BLOG_PASSWORD = os.environ.get('BLOG_PASSWORD') or 'test'
+
 
     @staticmethod
     def init_app(app):
