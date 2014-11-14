@@ -1,8 +1,31 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-from app import db
 
-class User(db.Model):
+from flask.ext.login import UserMixin
+from app import db, login_manager
+
+
+class SessionMixin(object):
+    def to_dict(self, *columns):
+        dct = {}
+        for col in columns:
+            value = getattr(self, col)
+            if isinstance(value, datetime.datetime):
+                value = value.strftime('%Y-%m-%d %H:%M:%S')
+            dct[col] = value
+        return dct
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        return self
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+        return self
+
+class User(db.Model, SessionMixin, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64))
@@ -22,12 +45,12 @@ class User(db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
     def __repr__(self):
         return '<User: %r>' % self.username
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 class Blog(db.Model):
     __tablename__ = 'blogs'
