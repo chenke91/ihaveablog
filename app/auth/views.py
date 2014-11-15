@@ -13,7 +13,7 @@ def register():
                     password=form.password.data,
                     email=form.email.data)
         user.save()
-        return 'i am' + user.username
+        return redirect(url_for('main.index'))
     return render_template('register.html', form=form)
 
 @auth.route('/login/', methods=['GET', 'POST'])
