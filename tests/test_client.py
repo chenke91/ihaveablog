@@ -1,3 +1,5 @@
+#coding:utf-8
+
 import unittest
 from flask import url_for
 from app import create_app, db
@@ -24,3 +26,15 @@ class BlogClientTestCase(unittest.TestCase):
             'password2': '111111'
         })
         self.assertTrue(response.status_code == 302)
+
+        response = self.client.post(url_for('auth.login'), data={
+                'email': 'sette@qq.com',
+                'password': '111111'
+            })
+        self.assertTrue(response.status_code == 302)
+
+        response = self.client.post(url_for('auth.login'), data={
+                'email': 'set@qq.com',
+                'password': '111111'
+            })
+        self.assertTrue(response.status_code == 200)

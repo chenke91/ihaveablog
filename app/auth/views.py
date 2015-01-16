@@ -24,5 +24,5 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             return redirect(request.args.get('next') or url_for('main.index'))
-        flash('密码错误')
+        flash('password error')
     return render_template('login.html', form=form)
