@@ -1,0 +1,45 @@
+{% extends "commons/admin_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-primary pull-right">新增</button> 
+        </div>
+    </div> 
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">博客管理</div>
+
+      <!-- Table -->
+      <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>文章</th>
+            <th>创建时间</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Flask基础教程</td>
+            <td>2014-12-11</td>
+            <td>
+                <button type="button" class="btn btn-primary">修改</button>
+                <button type="button" class="btn btn-warning">删除</button>
+            </td>
+        </tr>
+      </table>
+    </div>
+    
+    <!-- 分页 -->
+    <nav class="pull-right">
+      <ul class="pagination">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ul>
+    </nav>
+    <!-- 分页 -->
+{% endblock %}
