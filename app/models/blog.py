@@ -1,6 +1,7 @@
 from datetime import datetime
 from markdown import markdown
 import bleach
+from sqlalchemy import func
 from flask import current_app
 from app import db
 from app.helpers import paginate
@@ -32,15 +33,34 @@ class Blog(db.Model, SessionMixin):
         db.session.add(blog)
         db.session.commit()
 
+    #文章列表
     @staticmethod
     def get_blogs(page, category_id=None):
         per_page = current_app.config.get('PER_PAGE')
         query = db.session.query(Blog.id, Blog.avatar, Blog.title, Blog.summary_html,
-            Blog.timestamp, Blog.read_count, Category.name).join(Category)
+            Blog.timestamp, Blog.read_count, Category.name, Category.id).join(Category).\
+            order_by(Blog.timestamp.desc())
         if category_id is not None:
             query = query.filter(Blog.category_id==category_id)
         blogs = paginate(query, page, per_page)
         return blogs
+
+    #获取阅读最多的列表
+    @staticmethod
+    def get_top_read():
+        top_read_count = current_app.config.get('TOP_READ')
+        top_reads = db.session.query(Blog.id, Blog.title, Blog.read_count).\
+            order_by(Blog.read_count).limit(top_read_count).all()
+        return top_reads
+
+    #评论最多列表
+    @staticmethod
+    def get_top_reply():
+        top_reply_count = current_app.config.get('TOP_REPLY')
+        top_replies = db.session.query(Blog.id, Blog.title, func.count(Reply.id).label('replies_count')).\
+            outerjoin(Reply).order_by('replies_count desc').group_by(Blog.id).limit(top_reply_count).all()
+        # raise Exception(top_replies)
+        return top_replies
 
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):

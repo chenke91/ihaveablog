@@ -17,7 +17,7 @@
                   <div class="media-body">
                       <h5 class="media-heading">
                           <ol class="breadcrumb">
-                            <li><a href="#">{{ blog[6] }}</a></li>
+                            <li><a href="{{ url_for('main.category', id=blog[7]) }}">{{ blog[6] }}</a></li>
                             <li class="active">{{ blog[4].strftime('%Y年%m月%d %H:%M:%S') }}</li>
                             <li class="active">阅读({{ blog[5] }})</li>
                           </ol>
