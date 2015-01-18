@@ -33,10 +33,12 @@ class Blog(db.Model, SessionMixin):
         db.session.commit()
 
     @staticmethod
-    def get_blogs(page):
+    def get_blogs(page, category_id=None):
         per_page = current_app.config.get('PER_PAGE')
         query = db.session.query(Blog.id, Blog.avatar, Blog.title, Blog.summary_html,
             Blog.timestamp, Blog.read_count, Category.name).join(Category)
+        if category_id is not None:
+            query = query.filter(Blog.category_id==category_id)
         blogs = paginate(query, page, per_page)
         return blogs
 

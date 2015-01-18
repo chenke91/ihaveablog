@@ -16,4 +16,7 @@ def get_blog(id):
 
 @main.route('/blogs/category/<int:id>/')
 def category(id):
-    return str(id)
+    args = request.args
+    page = args.get('page', 1, type=int)
+    blogs = Blog.get_blogs(page, category_id=id)
+    return render_template('index.html', blogs=blogs)

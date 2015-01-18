@@ -9,6 +9,8 @@ class Config:
     # user info
     BLOG_USERNAME = os.environ.get('BLOG_NAME') or 'test'
     BLOG_PASSWORD = os.environ.get('BLOG_PASSWORD') or 'test'
+    TOP_READ = 5
+    TOP_REPLY = 5
 
     # pagination config
     PER_PAGE = 10
