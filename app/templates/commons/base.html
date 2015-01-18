@@ -8,6 +8,7 @@
 
     <!-- Bootstrap -->
     <link href="{{url_for('static', filename='components/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,13 +78,15 @@
         <div class="row mgb-30">
           <div class="col-md-12">
             <p>
-              <img src="{{url_for('static', filename='images/avatar.jpg')}}" alt="..." class="img-circle center-block" style="width:140px; height:140px;">  
+              <img src="{{url_for('static', filename='images/avatar.jpg')}}" alt="..." class="img-rounded" style="width:180px; height:160px;">  
             </p>
           </div>
-          <div class="col-md-11 col-md-offset-1">
-            <ul class="list-unstyled">
-              <li><span class="text-info">姓名: </span>陈柯</li>
-              <li><span class="text-info">email: </span>chenke91@qq.com</li>
+          <div class="col-md-12">
+            <h4>陈柯</h4>
+          </div>
+          <div class="col-md-12">
+            <ul class="list-unstyled vcard-details">
+              <li><span class="glyphicon glyphicon-envelope"></span> chenke91@qq.com</li>
               <li><span class="text-info">github: </span><a href="#">https://github.com/chenke91</a></li>
             </ul>
           </div>
