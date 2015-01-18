@@ -11,7 +11,7 @@ class Category(db.Model):
         cate1 = Category(name='Python')
         cate2 = Category(name='PHP')
         cate3 = Category(name='Linux')
-        db.session.add_all([cate3, cate2, cate1])
+        db.session.add_all([cate1, cate2, cate3])
         db.session.commit()
 
     def __repr__(self):

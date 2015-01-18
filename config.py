@@ -10,6 +10,9 @@ class Config:
     BLOG_USERNAME = os.environ.get('BLOG_NAME') or 'test'
     BLOG_PASSWORD = os.environ.get('BLOG_PASSWORD') or 'test'
 
+    # pagination config
+    PER_PAGE = 10
+
 
     @staticmethod
     def init_app(app):

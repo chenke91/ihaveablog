@@ -1,95 +1,45 @@
 {% extends "commons/base.html" %}
 {% block body %}
+      {% for blog in blogs['items'] %}
         <!-- 文章 -->
         <div class="row">
           <div class="row">
             <div class="col-md-12">
-                <h3>Flask 基础教程</h3>
+                <h3>{{ blog[2] }}</h3>
             </div>
           </div>
           <div class="row">
-            <div class="media">
-                <a href="#" class="media-left media-top">
-                    <img src="{{url_for('static', filename='images/image1.png')}}" style="width:200px; height:140px;">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                        <ol class="breadcrumb">
-                          <li><a href="#">Python</a></li>
-                          <li class="active">2015年01月12日 22:14:12</li>
-                          <li class="active">阅读(12)</li>
-                        </ol>
-                    </h5>
-                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                    <p><button type="button" class="btn btn-primary">继续阅读 》</button></p>
-                </div>
+            <div class="col-md-12">
+              <div class="media">
+                  <a href="#" class="media-left media-top">
+                      <img src="{{ blog[1] }}" style="width:200px; height:140px;">
+                  </a>
+                  <div class="media-body">
+                      <h5 class="media-heading">
+                          <ol class="breadcrumb">
+                            <li><a href="#">{{ blog[6] }}</a></li>
+                            <li class="active">{{ blog[4].strftime('%Y年%m月%d %H:%M:%S') }}</li>
+                            <li class="active">阅读({{ blog[5] }})</li>
+                          </ol>
+                      </h5>
+                      {{ blog[3] | safe }}
+                      <p><a href="/blogs/{{ blog[0] }}/"><button type="button" class="btn btn-primary">继续阅读 》</button></a></p>
+                  </div>
+              </div>
             </div>
           </div>
         </div>
         <!-- 文章 -->
-
-        <div class="row">
-          <div class="row">
-            <div class="col-md-12">
-                <h3>Flask 基础教程</h3>
-            </div>
-          </div>
-          <div class="row">
-            <div class="media">
-                <a href="#" class="media-left media-top">
-                    <img src="{{url_for('static', filename='images/image1.png')}}" style="width:200px; height:140px;">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                        <ol class="breadcrumb">
-                          <li><a href="#">Python</a></li>
-                          <li class="active">2015年01月12日 22:14:12</li>
-                          <li class="active">阅读(12)</li>
-                          <li class="active">评论(12)</li>
-                        </ol>
-                    </h5>
-                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                    <p><button type="button" class="btn btn-primary">继续阅读 》</button></p>
-                </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="row">
-            <div class="col-md-12">
-                <h3>Flask 基础教程</h3>
-            </div>
-          </div>
-          <div class="row">
-            <div class="media">
-                <a href="#" class="media-left media-top">
-                    <img src="{{url_for('static', filename='images/image1.png')}}" style="width:200px; height:140px;">
-                </a>
-                <div class="media-body">
-                    <h5 class="media-heading">
-                        <ol class="breadcrumb">
-                          <li><a href="#">Python</a></li>
-                          <li class="active">2015年01月12日 22:14:12</li>
-                          <li class="active">阅读(12)</li>
-                        </ol>
-                    </h5>
-                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                    <p><button type="button" class="btn btn-primary">继续阅读 》</button></p>
-                </div>
-            </div>
-          </div>
-        </div>
+      {% endfor %}
         <!-- 分页 -->
-        <nav class="pull-right">
-          <ul class="pagination">
-            <li class="disabled"><a href="#">&laquo;</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
+        <nav>
+          <ul class="pager pull-right">
+            {% if blogs['current_page'] > 1 %}
+            <li><a href="/?page={{ blogs['current_page']-1 }}">&larr; Older</a></li>
+            {% endif %}
+            {% if blogs['current_page'] != blogs['total_page'] %}
+            <li><a href="/?page={{ blogs['current_page']+1 }}">Newer &rarr;</a></li>
+            {% endif %}
           </ul>
         </nav>
         <!-- 分页 -->

@@ -1,8 +1,11 @@
 from datetime import datetime
 from markdown import markdown
 import bleach
+from flask import current_app
 from app import db
+from app.helpers import paginate
 from ._base import SessionMixin
+from .category import Category
 
 class Blog(db.Model, SessionMixin):
     __tablename__ = 'blogs'
@@ -28,6 +31,14 @@ class Blog(db.Model, SessionMixin):
             )
         db.session.add(blog)
         db.session.commit()
+
+    @staticmethod
+    def get_blogs(page):
+        per_page = current_app.config.get('PER_PAGE')
+        query = db.session.query(Blog.id, Blog.avatar, Blog.title, Blog.summary_html,
+            Blog.timestamp, Blog.read_count, Category.name).join(Category)
+        blogs = paginate(query, page, per_page)
+        return blogs
 
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
