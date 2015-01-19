@@ -1,4 +1,5 @@
 from datetime import datetime
+from random import randint
 from markdown import markdown
 import bleach
 from sqlalchemy import func
@@ -96,4 +97,5 @@ class Reply(db.Model, SessionMixin):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     username = db.Column(db.String(32))
     email = db.Column(db.String(128))
+    avatar = db.Column(db.Integer, default=randint(1,5))
     blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id'))
