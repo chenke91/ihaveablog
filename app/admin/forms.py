@@ -12,7 +12,7 @@ def get_category():
 class BlogForm(Form):
     title = StringField('标题', validators=[Required('请输入标题')])
     category = SelectField('栏目', choices=get_category())
-    blog_avatar = FileField('选择图片')
+    avatars = FileField('选择图片', validators=[Required('请上传图片')])
     summary = TextAreaField('摘要', validators=[Required('请输入摘要')])
     blog_body = TextAreaField('文章', validators=[Required('请输入文章正文')])
     submit = SubmitField('Submit')

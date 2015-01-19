@@ -15,6 +15,10 @@ class Config:
     # pagination config
     PER_PAGE = 10
 
+    #file input config
+    UPLOADS_DEFAULT_DEST = os.path.join(basedir, 'app/static/images/input_files')
+    UPLOADS_DEFAULT_URL = '/static/images/input_files'
+
 
     @staticmethod
     def init_app(app):

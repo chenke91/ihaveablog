@@ -29,6 +29,7 @@ class Blog(db.Model, SessionMixin):
             summary = form.summary.data,
             body = form.blog_body.data,
             category_id = form.category.data,
+            avatar = form.avatars.data
             )
         db.session.add(blog)
         db.session.commit()

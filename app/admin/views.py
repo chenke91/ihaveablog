@@ -1,5 +1,6 @@
-from flask import render_template, redirect, redirect, url_for
+from flask import render_template, request, redirect, url_for
 from app.models import Blog
+from app import avatars
 from . import admin
 
 @admin.route('/blogs/add/', methods=['GET', 'POST'])
@@ -7,6 +8,9 @@ def add_blog():
     from .forms import BlogForm
     form = BlogForm()
     if form.validate_on_submit():
+        filename = avatars.save(request.files['avatars'])
+        file_url = avatars.url(filename)
+        form.avatars.data = file_url
         Blog.from_form(form)
         return redirect(url_for('main.index'))
     return render_template('add_blog.html', form=form)
