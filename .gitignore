@@ -56,5 +56,7 @@ target/
 venv3/
 venv/
 
+app/static/images/input_files
+
 *.db
 *.sqlite
