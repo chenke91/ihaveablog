@@ -12,7 +12,10 @@ def index():
 
 @main.route('/blogs/<int:id>/')
 def get_blog(id):
-    return render_template('blog.html')
+    blog = Blog.query.filter_by(id=id).first_or_404()
+    blog.read_count += 1
+    blog.save()
+    return render_template('blog.html', blog=blog)
 
 @main.route('/blogs/category/<int:id>/')
 def category(id):

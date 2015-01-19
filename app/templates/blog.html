@@ -4,17 +4,21 @@
 <div class="row">
     <div class="col-md-12">
         <div class="page-header">
-            <h1>Flask教程 <small>Subtext for header</small></h1>
+            <h1>{{blog.title}}</h1>
         </div>
         <ol class="breadcrumb">
-          <li><a href="#">Python</a></li>
-          <li class="active">2015年01月12日 22:14:12</li>
-          <li class="active">阅读(12)</li>
-          <li class="active">评论(12)</li>
+          <li><a href="#">{{blog.category.name}}</a></li>
+          <li class="active">{{blog.timestamp.strftime('%Y年%m月%d日 %H:%M:%S')}}</li>
+          <li class="active">阅读({{blog.read_count}})</li>
+          <li class="active">评论({{blog.replies.count()}})</li>
 
         </ol>
-
-        <img src="{{url_for('static', filename='images/image1.png')}}" alt="..." class="img-thumbnail">        
+        <div class="row">
+        <img src="{{blog.avatar}}" alt="..." class="img-thumbnail">
+        </div>
+        <div class="blog-body">
+          {{blog.body_html | safe}}  
+        </div>   
     </div>
 </div>
 <!-- 评论列表 -->

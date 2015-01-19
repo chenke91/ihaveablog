@@ -50,7 +50,7 @@ class Blog(db.Model, SessionMixin):
     def get_top_read():
         top_read_count = current_app.config.get('TOP_READ')
         top_reads = db.session.query(Blog.id, Blog.title, Blog.read_count).\
-            order_by(Blog.read_count).limit(top_read_count).all()
+            order_by(Blog.read_count.desc()).limit(top_read_count).all()
         return top_reads
 
     #评论最多列表
