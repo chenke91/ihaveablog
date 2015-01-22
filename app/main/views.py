@@ -1,10 +1,11 @@
-from flask import render_template, request, current_app
+from flask import render_template, request, current_app, jsonify
 from app.models import Blog, User
 from .forms import ReplyForm
 from . import main
 
 @main.route('/')
 def index():
+    return render_template('test.html')
     args = request.args
     page = args.get('page', 1, type=int)
     blogs = Blog.get_blogs(page)
