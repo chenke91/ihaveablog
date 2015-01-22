@@ -1,11 +1,11 @@
+from random import randint
 from flask import render_template, request, current_app, jsonify
-from app.models import Blog, User
+from app.models import Blog, User, Reply
 from .forms import ReplyForm
 from . import main
 
 @main.route('/')
 def index():
-    return render_template('test.html')
     args = request.args
     page = args.get('page', 1, type=int)
     blogs = Blog.get_blogs(page)
@@ -19,7 +19,12 @@ def get_blog(id):
     blog.save()
     form = ReplyForm()
     if form.validate_on_submit():
-        return form.body.data
+        reply = Reply(body=form.body.data,
+            username=form.username.data,
+            email=form.email.data,
+            avatar = randint(1, 5), 
+            blog=blog)
+        reply.save()
     return render_template('blog.html', blog=blog, form=form)
 
 @main.route('/blogs/category/<int:id>/')

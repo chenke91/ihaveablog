@@ -38,50 +38,21 @@
         </div> 
 
         <!-- 评论列表 -->
-        <div class="media">
-          <a class="media-left" href="#">
-            <img src="/static/images/blog_avatars/reply_avatar_1.jpg" class="img-thumbnail reply-avatar" alt="...">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            <p>这是评论的内容</p>
+        <div class="row">
+          
+          {% for reply in blog.replies.all() %}
+          <div class="col-md-6 reply-body">
+            <div class="media">
+              <a class="media-left" href="#">
+                <img src="/static/images/blog_avatars/reply_avatar_{{ reply.avatar }}.jpg" class="img-thumbnail reply-avatar" alt="...">
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading">{{ reply.username }}</h4>
+                <p>{{ reply.body }}</p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="media">
-          <a class="media-left" href="#">
-            <img src="/static/images/blog_avatars/reply_avatar_2.jpg" class="img-thumbnail reply-avatar" alt="...">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            <p>这是评论的内容</p>
-          </div>
-        </div>
-        <div class="media">
-          <a class="media-left" href="#">
-            <img src="/static/images/blog_avatars/reply_avatar_3.jpg" class="img-thumbnail reply-avatar" alt="...">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            <p>这是评论的内容</p>
-          </div>
-        </div>
-        <div class="media">
-          <a class="media-left" href="#">
-            <img src="/static/images/blog_avatars/reply_avatar_4.jpg" class="img-thumbnail reply-avatar" alt="...">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            <p>这是评论的内容</p>
-          </div>
-        </div>
-        <div class="media">
-          <a class="media-left" href="#">
-            <img src="/static/images/blog_avatars/reply_avatar_5.jpg" class="img-thumbnail reply-avatar" alt="...">
-          </a>
-          <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            <p>这是评论的内容</p>
-          </div>
+          {% endfor %}
         </div>
     </div>
 </div> 

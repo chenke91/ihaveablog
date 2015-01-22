@@ -9,6 +9,13 @@ def get_category():
     res = map(lambda x: (str(x[0]),x[1]), categories)
     return list(res)
 
+class EditBlogForm(Form):
+    title = StringField('标题', validators=[Required('请输入标题')])
+    category = SelectField('栏目', choices=get_category())
+    summary = TextAreaField('摘要', validators=[Required('请输入摘要'), Length(1, 600)])
+    blog_body = TextAreaField('文章', validators=[Required('请输入文章正文')])
+    submit = SubmitField('Submit')
+
 class BlogForm(Form):
     title = StringField('标题', validators=[Required('请输入标题')])
     category = SelectField('栏目', choices=get_category())
@@ -16,3 +23,5 @@ class BlogForm(Form):
     summary = TextAreaField('摘要', validators=[Required('请输入摘要'), Length(1, 600)])
     blog_body = TextAreaField('文章', validators=[Required('请输入文章正文')])
     submit = SubmitField('Submit')
+
+

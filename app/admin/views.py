@@ -15,6 +15,23 @@ def add_blog():
         return redirect(url_for('main.index'))
     return render_template('add_blog.html', form=form)
 
+@admin.route('/blogs/edit/<int:id>/', methods=['GET', 'POST'])
+def edit_blog(id):
+    from .forms import EditBlogForm
+    blog = Blog.query.get_or_404(id)
+    form = EditBlogForm(title=blog.title,
+        category=blog.category_id,
+        summary=blog.summary,
+        blog_body=blog.body)
+    if form.validate_on_submit():
+        blog.title = form.title.data
+        blog.category_id = form.category.data
+        blog.summary = form.summary.data
+        blog.body = form.blog_body.data
+        blog.save()
+        return redirect(url_for('main.get_blog', id=id))
+    return render_template('edit_blog.html', form=form)
+
 @admin.route('/blogs/')
 def get_blogs():
     return render_template('admin_blogs.html')
