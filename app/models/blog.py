@@ -1,5 +1,5 @@
 from datetime import datetime
-from markdown import markdown
+from markdown2 import markdown
 import bleach
 from sqlalchemy import func
 from flask import current_app
@@ -65,22 +65,23 @@ class Blog(db.Model, SessionMixin):
 
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
-        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
-                        'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-                        'h1', 'h2', 'h3', 'p']
-        target.body_html = bleach.linkify(bleach.clean(
-            markdown(value, output_format='html'),
-            tags=allowed_tags, strip=True))
+        # allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+        #                 'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+        #                 'h1', 'h2', 'h3', 'p', 'tables', 'thead', 'tr', 'th', 'td']
+        # target.body_html = bleach.linkify(bleach.clean(
+        #     markdown(value, extras=['tables']),
+        #     tags=allowed_tags, strip=True))
+        target.body_html = markdown(value, extras=['tables'])
 
     @staticmethod
     def on_change_summary(target, value, oldvalue, initiator):
-        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
-                        'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-                        'h1', 'h2', 'h3', 'p']
-        target.summary_html = bleach.linkify(bleach.clean(
-            markdown(value, output_format='html'),
-            tags=allowed_tags, strip=True))
-
+        # allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+        #                 'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+        #                 'h1', 'h2', 'h3', 'p', 'tables', 'thead', 'tr', 'th', 'td']
+        # target.summary_html = bleach.linkify(bleach.clean(
+        #     markdown(value, extras=['tables']),
+        #     tags=allowed_tags, strip=True))
+        target.body_html = markdown(value, extras=['tables'])
 
     def __repr__(self):
         return '<Blog: %r>' % self.title
