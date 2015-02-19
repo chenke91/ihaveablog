@@ -1,6 +1,7 @@
 from .user import User
 from .blog import Blog, Reply
 from .category import Category
+from .role import Role
 
 def init_data():
     from app import db

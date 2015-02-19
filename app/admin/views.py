@@ -1,9 +1,13 @@
 from flask import render_template, request, redirect, url_for
+from flask.ext.login import login_required
 from app.models import Blog
 from app import avatars
+from app.decorators import admin_required
 from . import admin
 
 @admin.route('/blogs/add/', methods=['GET', 'POST'])
+@login_required
+@admin_required
 def add_blog():
     from .forms import BlogForm
     form = BlogForm()
@@ -16,6 +20,8 @@ def add_blog():
     return render_template('add_blog.html', form=form)
 
 @admin.route('/blogs/edit/<int:id>/', methods=['GET', 'POST'])
+@login_required
+@admin_required
 def edit_blog(id):
     from .forms import EditBlogForm
     blog = Blog.query.get_or_404(id)
@@ -33,6 +39,8 @@ def edit_blog(id):
     return render_template('edit_blog.html', form=form)
 
 @admin.route('/blogs/')
+@login_required
+@admin_required
 def get_blogs():
     return render_template('admin_blogs.html')
 
