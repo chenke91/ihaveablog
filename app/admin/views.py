@@ -42,5 +42,6 @@ def edit_blog(id):
 @login_required
 @admin_required
 def get_blogs():
-    return render_template('admin_blogs.html')
+    blogs = Blog.query.all()
+    return render_template('admin_blogs.html', blogs=blogs)
 

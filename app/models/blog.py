@@ -69,7 +69,7 @@ class Blog(db.Model, SessionMixin):
 
     @staticmethod
     def on_change_summary(target, value, oldvalue, initiator):
-        target.body_html = markdown(value, extras=['tables'])
+        target.summary_html = markdown(value, extras=['tables'])
 
     def __repr__(self):
         return '<Blog: %r>' % self.title
