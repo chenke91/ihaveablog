@@ -11,9 +11,9 @@
 }
 
 .blog-body {
-    padding-top: 25px;
-    padding-bottom: 15px;
+    padding: 15px 20px;
     border-bottom: 1px solid #eee;
+    background-color: white;
 }
 
 .reply-body {
@@ -28,24 +28,28 @@
 
 /*table*/
 table {
+    background-color: transparent;
     font-family: verdana,arial,sans-serif;
     font-size:11px;
     color:#333333;
     border-width: 1px;
-    border-color: #666666;
+    border-color: #ccc;
     border-collapse: collapse;
 }
 th {
     border-width: 1px;
     padding: 8px;
     border-style: solid;
-    border-color: #666666;
-    background-color: #dedede;
+    border-color: #ccc;
+    background-color: #eee;
 }
 td {
     border-width: 1px;
     padding: 8px;
     border-style: solid;
-    border-color: #666666;
+    border-color: #ccc;
     background-color: #ffffff;
+}
+body {
+    background-color: #eeeeee;
 }

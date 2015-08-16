@@ -23,6 +23,16 @@ class Blog(db.Model, SessionMixin):
     uid = db.Column(db.Integer, db.ForeignKey('users.id'))
     replies = db.relationship('Reply', backref='blog', lazy='dynamic')
 
+    def to_dict(self):
+        return dict(
+            id = self.id,
+            title = self.title,
+            read_count = self.read_count,
+            category_id = self.category_id,
+            avatar = self.avatar,
+            timestamp = self.timestamp.strftime('%Y年%m月%d %H:%M:%S')
+        )
+
     @staticmethod
     def from_form(form):
         blog = Blog(title = form.title.data,

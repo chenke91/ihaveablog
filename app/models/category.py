@@ -14,5 +14,11 @@ class Category(db.Model):
         db.session.add_all([cate1, cate2, cate3])
         db.session.commit()
 
+    def to_dict(self):
+        return dict(
+            id = self.id,
+            name = self.name
+        )
+
     def __repr__(self):
         return '<Type: %r>' % self.name

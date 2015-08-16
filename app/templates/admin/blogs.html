@@ -1,0 +1,73 @@
+{% extends "admin/base.html" %}
+{% block page_content %}
+<div ng-app="myApp" ng-controller="BlogListController">
+    <div class="panel panel-default">
+      <div class="panel-menu p12 admin-form theme-primary">
+        <div class="row">
+            <div class="col-md-offset-5 col-md-3">
+                <div class="section">
+                  <label class="field select">
+                    <select id="country" name="country">
+                    {%raw%}
+                      <option value="{{data.id}}" ng-repeat="data in blogs.categories">{{data.name}}</option>
+                    {%endraw%}
+                    </select>
+                    <i class="arrow"></i>
+                  </label>
+                </div>
+            </div>
+            <div class=" col-md-3">
+                <label class="field append-icon">
+                    <input type="text" name="firstname" id="firstname" class="gui-input" placeholder="Filter" ng-model="blogs.query">
+                    <label for="firstname" class="field-icon">
+                        <i class="fa fa-filter"></i>
+                    </label>
+                </label>
+            </div>
+            <div class="col-md-1">
+                <a class="btn btn-primary" href="{{url_for('admin.add_blog')}}">新建</a>
+            </div>
+        </div>
+    </div>
+      <div class="panel-body">
+          <!-- Table -->
+          <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>标题</th>
+                <th>类别</th>
+                <th>阅读数</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            {% raw %}
+            <tr ng-repeat="blog in blogs.blogs | filter : blogs.query">
+                <td>{{blog.id}}</td>
+                <td>{{blog.title}}</td>
+                <td>{{blog.category_id | get_cate_byid : blogs.categories}}</td>
+                <td>{{blog.read_count}}</td>
+                <td>{{blog.timestamp}}</td>
+                <td>
+                    <a type="button" class="btn btn-primary" href="/admin/blogs/edit/{{blog.id}}/">修改</a>
+                    <a type="button" class="btn btn-warning">删除</a>
+                </td>
+            </tr>
+            {% endraw %}
+          </table>
+      </div>
+          <!-- 分页 -->
+            <nav class="pull-right" style="display: block">
+              <ul class="pagination">
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+            </nav>
+            <!-- 分页 -->
+    </div>
+</div>
+{% endblock %}

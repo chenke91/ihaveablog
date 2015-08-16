@@ -14,18 +14,13 @@
           <li class="active">评论({{blog.replies.count()}})</li>
 
         </ol>
-        <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <img src="{{blog.avatar}}" alt="..." class="img-thumbnail">   
-        </div>
-        </div>
         <div class="blog-body">
           {{blog.body_html | safe}}  
         </div>   
     </div>
 </div>
 <!-- 评论列表 -->
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-12">
         <div class="page-header">
             <h4>评论</h4>
@@ -37,7 +32,6 @@
           </div>
         </div> 
 
-        <!-- 评论列表 -->
         <div class="row">
           
           {% for reply in blog.replies.all() %}
@@ -55,5 +49,5 @@
           {% endfor %}
         </div>
     </div>
-</div> 
+</div>  -->
 {% endblock %}

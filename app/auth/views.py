@@ -23,6 +23,6 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
-            return redirect(request.args.get('next') or url_for('main.index'))
+            return redirect(request.args.get('next') or url_for('admin.get_blogs'))
         flash('password error')
-    return render_template('login.html', form=form)
+    return render_template('admin/login.html', form=form)
